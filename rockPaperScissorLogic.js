@@ -2,7 +2,12 @@
 
 let HUMANSCORE = 0;
 let CPUSCORE = 0;
-const CHOICES = ["ROCK", "PAPER", "SCISSORS"]
+const CHOICES = ["ROCK", "PAPER", "SCISSORS"];
+const ROCK = document.getElementById('Rock');
+const PAPER = document.getElementById('Paper');
+const SCISSOR = document.getElementById('Scissors');
+const SCORETEXT = document.getElementById('scoresText');
+const RESULTTEXT = document.getElementById('resultText');
 
 //Make the cpu logic
 
@@ -27,54 +32,48 @@ function getHumanChoice(){
 }
 
 //Logic for the results
-function playRound(humanChoice, computerChoice) {
-    console.log("Human Chose: " + humanChoice);
-    console.log("CPU Chose: " + computerChoice);
+function playRound (humanChoice, computerChoice) {
     if(humanChoice == "ROCK" && computerChoice == "SCISSORS"){
         HUMANSCORE += 1
     }
     else if(humanChoice == "ROCK" && computerChoice == "PAPER"){
         CPUSCORE += 1
+        RESULTTEXT.innerText = 'You Picked Rock and CPU Picked Paper, CPU Wins Round';
     }
     else if(humanChoice == "PAPER" && computerChoice == "ROCK"){
         HUMANSCORE += 1
+        RESULTTEXT.innerText = 'You Picked Paper and CPU Picked ROCK, Human WinsRound';
     }
-    else if(humanChoice == "PAPER" && computerChoice == "SCISSORS"){
+    else if(humanChoice == "PAPER" && computerChoice == "Scissors"){
         CPUSCORE += 1
+        RESULTTEXT.innerText = 'You Picked Paper and CPU Picked Scissors, CPU Wins Round';
     }
     else if(humanChoice == "SCISSORS" && computerChoice == "PAPER"){
         HUMANSCORE += 1
+        RESULTTEXT.innerText = 'You Picked Scissors and CPU Picked Paper, Human Wins Round';
     }
     else if(humanChoice == "SCISSORS" && computerChoice == "ROCK"){
         CPUSCORE += 1
+        RESULTTEXT.innerText = 'You Picked Scissors and CPU Picked Rock, CPU Wins Round';
     }
     else{
-        console.log("Both player and cpu chose the same decision no score increase");
+        RESULTTEXT.innerText = 'Both player and cpu chose the same thing no score increase';
     }
-    console.log("Human Score: " + HUMANSCORE + " CPU Score: " + CPUSCORE);
-}
-
-//Game Logic for 5 rounds
-function playGame(rounds){
-    console.log(rounds +" Rounds of Rock, Paper, Scissors start now. . .");
-    for(let i = 0 ; i <rounds; i++){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
+    SCORETEXT.innerText = "Human Score :"+HUMANSCORE + " CPU Score : " + CPUSCORE;
+    if(HUMANSCORE == 5){
+        RESULTTEXT.innerText = 'Player scored to 5 first Player WINS Game'
+        ROCK.remove();
+        PAPER.remove();
+        SCISSOR.remove();
     }
-
-    console.log("Final Score = Human score: " + HUMANSCORE + " CPU score: " + CPUSCORE);
-
-    if(HUMANSCORE > CPUSCORE){
-        console.log("Human Won Congratulation!")
-    }
-    else if(HUMANSCORE < CPUSCORE){
-        console.log("CPU Won Sorry!")
-    }
-    else{
-        console.log("TIED that is surprising");
+    if(CPUSCORE == 5){
+        RESULTTEXT.innerText = 'Player scored to 5 first Player WINS Game';
+        ROCK.remove();
+        PAPER.remove();
+        SCISSOR.remove();
     }
 }
 
-//Start game
-playGame(5)
+ROCK.addEventListener("click", () => playRound("ROCK",getComputerChoice()));
+PAPER.addEventListener("click", () => playRound("PAPER",getComputerChoice()));
+SCISSOR.addEventListener("click", () => playRound("SCISSORS",getComputerChoice()));

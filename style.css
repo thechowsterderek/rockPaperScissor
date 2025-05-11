@@ -1,0 +1,28 @@
+body{
+}
+
+header{
+    display:flex;
+    justify-content: center; 
+}
+
+#results{
+    display:flex;
+    justify-content: center;
+}
+
+#scores{
+    display:flex;
+    justify-content: center;
+}
+
+.playerButtons{
+    list-style: none;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playerButtons li button{
+    flex:1;
+}
